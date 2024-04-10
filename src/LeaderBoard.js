@@ -6,7 +6,7 @@ export default function LeaderBoard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/data.json');
+                const response = await fetch('data.json');
                 const data = await response.json();
 
                 // data.forEach(item=>{
@@ -14,6 +14,10 @@ export default function LeaderBoard() {
                 // });
                 
                 console.log(data);
+
+                data.sort((a, b) => {
+                    return b.gfg_score - a.gfg_score;
+                })
 
                 setLeaderboardData(data);
             }
@@ -31,15 +35,15 @@ export default function LeaderBoard() {
             <table className="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Player Name</th>
-                        <th scope="col">Score</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Geeks for Geeks Score</th>
                     </tr>
                 </thead>
                 <tbody>
                     {leaderboardData.map((player, index) => (
                         <tr key={index}>
                             <td>{player.user_name}</td>
-                            <td>{player.gfg_score}</td>
+                            <td>{player.gfg_score}</td> 
                         </tr>
                     ))}
                 </tbody>

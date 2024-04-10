@@ -7,7 +7,7 @@ puppeteer.use(StealthPlugin());
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
 async function scrapeUserData(userNames) {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const scrapedData = [];
 
     try {
@@ -87,9 +87,9 @@ const updateScoresInJsonFile = (newScores) => {
 
             newScores.forEach(player => {
                 console.log('usr_name: ' + player.user_name + ' gfg_score: ' + player.gfg_score);
-                const check = leaderboardData.find(user => user.gfg_user_name === player.user_name);
-                if (check) {
-                    check.gfg_score = player.gfg_score;
+                const updated_user = leaderboardData.find(user => user.gfg_user_name === player.user_name);
+                if (updated_user) {
+                    updated_user.gfg_score = player.gfg_score;
                 } else {
                     console.warn(`Player '${player.user_name}' not found in leaderboard data.`);
                 }
